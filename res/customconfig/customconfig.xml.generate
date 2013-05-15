@@ -346,8 +346,21 @@ echo '
     </settingsPane>' >> $XML
 
 echo "
+    <settingsPane description=\"Zzmoove predefined profiles\" name=\"Zzmoove predefined profiles\">
+      <spinner description=\"Zzmoove predefined profiles\" name=\"Zzmoove predefined profiles\" action=\"zzpredefs zzpredef\">
+             <spinnerItem name=\"Default\" value=\"0\"/> 
+             <spinnerItem name=\"Default w/FS\" value=\"1\"/> 
+             <spinnerItem name=\"Battery\" value=\"2\"/> 
+             <spinnerItem name=\"Battery w/FS\" value=\"3\"/> 
+             <spinnerItem name=\"Optimized\" value=\"4\"/> 
+             <spinnerItem name=\"Optimized w/FS\" value=\"5\"/> 
+             <spinnerItem name=\"Performance\" value=\"6\"/>
+             <spinnerItem name=\"Performance w/FS\" value=\"7\"/>
+      </spinner>
+    </settingsPane>
     <settingsPane description=\"Parameters governing the dynamic voltage frequency scaling policy on the CPU.\" 
                   name=\"Zzmoove tuneables\">
+
       <seekBar description=\"The sampling period size in which the governor polls CPU load and triggers its decision making. Default: 100000 µS.\" 
                name=\"Sampling rate\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate\"
