@@ -9,7 +9,21 @@ echo '
 
 echo '
   <settingsTab name="CPU">
+      <settingsPane description="PegasusQ is the default governor for daily running and complete power management schemes. SmartassV2 governor from Erasmux aim for an ideal frequency. The Hotplug governor scales CPU frequency based on load. Lulzactiveq is a modified lulzactive governor and a second version of Luzactive based on Interactive and Smartass governors. UserSpace give users to set frequencies. PowerSave locks max frequency to min frequency. Performance governor is purely for synthetic uses, locking frequency at maximum with all cores online. zzMoove is a battery friendly behaving hotplug conservative governor." 
+                  name="Active governor choice">' >> $XML
+echo "
+      <spinner description=\"Set active governor. Default: `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`\" 
+               name=\"Current governor\" 
+               action=\"generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor\">" >> $XML
 
+for GOVERNOR in `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors`; do
+  echo "
+        <spinnerItem name=\"$GOVERNOR\" value=\"$GOVERNOR\"/>" >> $XML
+done
+
+echo '
+      </spinner>
+    </settingsPane>
     <settingsPane description="Apply the settings on boot only if the desired settings prove to be stable, else the device ends up in a boot-loop. If turned off, the displayed values do not correspond the current live values but the saved profile values, some inconsistencies may occur on applying." 
                   name="CPU control switch">
       <checkbox description="If enabled, the below settings will be applied at boot." 
@@ -63,22 +77,7 @@ echo '
     </settingsPane>
   </settingsTab>
 
-  <settingsTab name="CPU scaling">
-    <settingsPane description="PegasusQ is the default governor for daily running and complete power management schemes. The performance governor is purely for synthetic uses, locking frequency at maximum with all cores online.ZZMOOVE tuneables are found at the last part of this section." 
-                  name="Active governor choice">' >> $XML
-echo "
-      <spinner description=\"Set active governor. Default: `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`\" 
-               name=\"Current governor\" 
-               action=\"generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor\">" >> $XML
-
-for GOVERNOR in `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors`; do
-  echo "
-        <spinnerItem name=\"$GOVERNOR\" value=\"$GOVERNOR\"/>" >> $XML
-done
-
-echo '
-      </spinner>
-    </settingsPane>
+  <settingsTab name="PegasusQ Lab">
     <settingsPane description="Parameters governing the dynamic voltage frequency scaling policy on the CPU." 
                   name="PegasusQ tuneables">' >> $XML
 
@@ -180,128 +179,6 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/pegasusq/flexrate_forcerate\"
                unit=\"µS\" min=\"0\" reversed=\"false\" step=\"500\" max=\"30000\"/>
     </settingsPane>
-    <settingsPane description=\"Parameters governing the dynamic voltage frequency scaling policy on the CPU.\" 
-                  name=\"Zzmoove tuneables\">
-
-      <seekBar description=\"The sampling period size in which the governor polls CPU load and triggers its decision making. Default: 100000 µS.\" 
-               name=\"Sampling rate\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate\"
-               unit=\"µS\" min=\"10000\" reversed=\"false\" step=\"1000\" max=\"100000\"/>
-
-      <seekBar description=\"If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default: 4.\" 
-               name=\"Sampling down factor\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_down_factor\"
-               unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"10\"/>
-
-      <seekBar description=\"If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: 70%.\" 
-               name=\"Up threshold\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold\"
-               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"99\"/>
-
-      <seekBar description=\"This is same as the up_threshold but for the opposite direction. For example when set to its default value of 52 it means that if the CPU usage needs to be below 52 between samples to have the frequency decreased. Default: 52%.\" 
-               name=\"Down threshold\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"52\"/>
-
-      <seekBar description=\"This parameter takes a value of 0 or 1. When set to 0 its default, all processes are counted towards the cpu utilization value. When set to 1, the processes that are run with a nice value will not count (and thus be ignored) in the overall usage calculation. This is useful if you are running a CPU intensive calculation on your laptop that you do not care how long it takes to complete as you can nice it and prevent it from taking part in the deciding process of whether to increase your CPU frequency. Default: 0.\" 
-               name=\"Ignore nice load\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/ignore_nice_load\"
-               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
-
-      <seekBar description=\"This describes what percentage steps the CPU freq should be increased and decreased smoothly by. By default the CPU frequency will increase in 5% chunks of your maximum CPU frequency. You can change this value to anywhere between 0 and 100 where 0 will effectively lock your CPU at a speed regardless of its load whilst 100 will, in theory, make it behave identically to the ondemand governor. Default: 5%.\"
-               name=\"Frequency step\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_step\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"This modification makes the governor use two lookup tables holding current, next and previous frequency to directly get a correct target frequency instead of calculating target quencies with up_threshold and step_up %. The two scaling lookup tables used contain different scaling steps/frequencies to achieve faster upscaling on higher CPU load.. Default: 75%.\"
-               name=\"Smooth Up\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/smooth_up\"
-               unit=\"%\" min=\"1\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Limit freqency at screen on. Possible values 0 disable limit, 200000-1600000. Default: 0hz.\"
-               name=\"Frequency limits\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit\"
-               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1600000\"/>
-
-      <seekBar description=\"Fast scaling at screen on. Possible values 0 disable or 1 enable, default: 0). Default: 0.\" 
-               name=\"Fast scaling\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling\"
-               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
-
-      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core1, possible range from down_threshold up to 100. Default: 68%.\"
-               name=\"Hotplug up threshold CPU1\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug1\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core2, possible range from down_threshold up to 100. Default: 68%.\"
-               name=\"Hotplug up threshold CPU2\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug2\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core3, possible range from down_threshold up to 100. Default: 68%.\"
-               name=\"Hotplug up threshold CPU3\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug3\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Hotplug down threshold for cpu1. Possible range from 11 to under up_threshold. Default: 55%.\"
-               name=\"Hotplug down threshold CPU1\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug1\"
-               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Hotplug down threshold for cpu2. Possible range from 11 to under up_threshold. Default: 55%.\"
-               name=\"Hotplug down threshold CPU2\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug2\"
-               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Hotplug down threshold for cpu3. Possible range from 11 to under up_threshold. Default: 55%.\"
-               name=\"Hotplug down threshold CPU3\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug3\"
-               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Sampling rate sleep multiplier, possible values 1 or 2. Default: 2.\" 
-               name=\"Sampling rate sleep multiplier\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate_sleep_multiplier\"
-               unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"2\"/>
-
-      <seekBar description=\"Down threshold on early suspend. Possible range from 11 to under up_threshold_sleep. Default: 60%.\" 
-               name=\"Down threshold sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_sleep\"
-               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Up threshold on early suspend. Ppossible range from above down_threshold_sleep up to 100. Default: 100%.\"
-               name=\"Up threshold sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_sleep\"
-               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Up threshold on early suspend. Possible range from above down_threshold_sleep up to 100. Default: 100%.\" 
-               name=\"Smooth up sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/smooth_up_sleep\"
-               unit=\"%\" min=\"1\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Possible values 0 do not touch hotplug-settings on early suspend, values 1, 2 or 3 are equivalent to cores which should be online at early suspend. Default: 1.\" 
-               name=\"Hotplug sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/hotplug_sleep\"
-               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"3\"/>
-
-      <seekBar description=\"Possible values 0 disable, 200000-1600000 khz freqency soft-limit on early suspend, if not set default is 0. Default: 800000hz.\" 
-               name=\"Frequency limit sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep\"
-               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"10000\" max=\"1600000\"/>
-
-      <seekBar description=\"Possible values: range from 0 to 100, if not set default is 5, value 0 will stop freq scaling and hold on actual freq. Value 100 will directly jump up or down to limits like ondemand governor. Default: 1.\" 
-               name=\"Frequency step sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_step_sleep\"
-               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
-      <seekBar description=\"Fast scaling on early suspend. Possible values 0 disable or 1 enable. Default: 0.\" 
-               name=\"Fast scaling sleep\" 
-               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling_sleep\"
-               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
-
-    </settingsPane>
-  </settingsTab>
-
-  <settingsTab name=\"CPU Hotplug\">
     <settingsPane description=\"Tuneables for CPU hotplug (PegasusQ), online-ing and offline-ing of cores on light use when not being used.\" 
                   name=\"Scaling speed\">
 
@@ -322,7 +199,7 @@ echo "
 
     </settingsPane>
     <settingsPane description=\"Override hotplug decisions and limit core count to given boundaries. Priorities: hotplug lock > max cpu lock > min cpu lock\" 
-                  name=\"Configuration overrides\">
+                  name=\"HotPlug Configuration overrides\">
 
       <seekBar description=\"Locks the core count and disables the hotplug logic. 0 disables the setting. Default: `cat /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_lock` core(s).\"
                name=\"Hotplug lock\" 
@@ -463,7 +340,134 @@ echo "
 echo '
     </settingsPane>
   </settingsTab>
+  <settingsTab name="Zzmoove Lab">
+    <settingsPane description="Basically this is the ported SGS1 version of the well known smoove governor from the good old midnight kernel from Michael Weingaertner (mialwe) with a modified CPU hotplug implementation of the ktoonservative governor from ktoonesz. This governor uses more often only one cpu on idle and as a consequence of that it needs less energy. Depending on System load and governor settings all 4 cores will be instantly up again if it is needed."  
+                  name="Disclaimer">
+    </settingsPane>' >> $XML
 
+echo "
+    <settingsPane description=\"Parameters governing the dynamic voltage frequency scaling policy on the CPU.\" 
+                  name=\"Zzmoove tuneables\">
+      <seekBar description=\"The sampling period size in which the governor polls CPU load and triggers its decision making. Default: 100000 µS.\" 
+               name=\"Sampling rate\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate\"
+               unit=\"µS\" min=\"10000\" reversed=\"false\" step=\"1000\" max=\"120000\"/>
+
+      <seekBar description=\"If we scale up to the maximum policy frequency, extend the next sample period by a factor of so much. Default: 4.\" 
+               name=\"Sampling down factor\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_down_factor\"
+               unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"10\"/>
+
+      <seekBar description=\"If the load exceeds the up threshold percentage on a single core, we trigger the scaling up logic. Default: 70%.\" 
+               name=\"Up threshold\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold\"
+               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"99\"/>
+
+      <seekBar description=\"This is same as the up_threshold but for the opposite direction. For example when set to its default value of 52 it means that if the CPU usage needs to be below 52 between samples to have the frequency decreased. Default: 52%.\" 
+               name=\"Down threshold\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"52\"/>
+
+      <seekBar description=\"This parameter takes a value of 0 or 1. When set to 0 its default, all processes are counted towards the cpu utilization value. When set to 1, the processes that are run with a nice value will not count (and thus be ignored) in the overall usage calculation. This is useful if you are running a CPU intensive calculation on your laptop that you do not care how long it takes to complete as you can nice it and prevent it from taking part in the deciding process of whether to increase your CPU frequency. Default: 0.\" 
+               name=\"Ignore nice load\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/ignore_nice_load\"
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
+
+      <seekBar description=\"This describes what percentage steps the CPU freq should be increased and decreased smoothly by. By default the CPU frequency will increase in 5% chunks of your maximum CPU frequency. You can change this value to anywhere between 0 and 100 where 0 will effectively lock your CPU at a speed regardless of its load whilst 100 will, in theory, make it behave identically to the ondemand governor. Default: 5%.\"
+               name=\"Frequency step\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_step\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"This modification makes the governor use two lookup tables holding current, next and previous frequency to directly get a correct target frequency instead of calculating target quencies with up_threshold and step_up %. The two scaling lookup tables used contain different scaling steps/frequencies to achieve faster upscaling on higher CPU load.. Default: 75%.\"
+               name=\"Smooth Up\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/smooth_up\"
+               unit=\"%\" min=\"1\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Limit freqency at screen on. Possible values 0 disable limit, 200000-1600000. Default: 0hz.\"
+               name=\"Frequency limits\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit\"
+               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1600000\"/>
+
+      <seekBar description=\"Fast scaling at screen on. Possible values 0 disable or 1 enable, default: 0). Default: 0.\" 
+               name=\"Fast scaling\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling\"
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
+
+      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core1, possible range from down_threshold up to 100. Default: 68%.\"
+               name=\"Hotplug up threshold CPU1\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug1\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core2, possible range from down_threshold up to 100. Default: 68%.\"
+               name=\"Hotplug up threshold CPU2\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug2\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Hotplug up threshold for cpu1. 0 disable core3, possible range from down_threshold up to 100. Default: 68%.\"
+               name=\"Hotplug up threshold CPU3\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug3\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Hotplug down threshold for cpu1. Possible range from 11 to under up_threshold. Default: 55%.\"
+               name=\"Hotplug down threshold CPU1\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug1\"
+               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Hotplug down threshold for cpu2. Possible range from 11 to under up_threshold. Default: 55%.\"
+               name=\"Hotplug down threshold CPU2\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug2\"
+               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Hotplug down threshold for cpu3. Possible range from 11 to under up_threshold. Default: 55%.\"
+               name=\"Hotplug down threshold CPU3\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug3\"
+               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Sampling rate sleep multiplier, possible values 1 or 2. Default: 2.\" 
+               name=\"Sampling rate sleep multiplier\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate_sleep_multiplier\"
+               unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"2\"/>
+
+      <seekBar description=\"Down threshold on early suspend. Possible range from 11 to under up_threshold_sleep. Default: 60%.\" 
+               name=\"Down threshold sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_sleep\"
+               unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Up threshold on early suspend. Ppossible range from above down_threshold_sleep up to 100. Default: 100%.\"
+               name=\"Up threshold sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_sleep\"
+               unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Up threshold on early suspend. Possible range from above down_threshold_sleep up to 100. Default: 100%.\" 
+               name=\"Smooth up sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/smooth_up_sleep\"
+               unit=\"%\" min=\"1\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Possible values 0 do not touch hotplug-settings on early suspend, values 1, 2 or 3 are equivalent to cores which should be online at early suspend. Default: 1.\" 
+               name=\"Hotplug sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/hotplug_sleep\"
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"3\"/>
+
+      <seekBar description=\"Possible values 0 disable, 200000-1600000 khz freqency soft-limit on early suspend, if not set default is 0. Default: 800000hz.\" 
+               name=\"Frequency limit sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep\"
+               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"10000\" max=\"1600000\"/>
+
+      <seekBar description=\"Possible values: range from 0 to 100, if not set default is 5, value 0 will stop freq scaling and hold on actual freq. Value 100 will directly jump up or down to limits like ondemand governor. Default: 1.\" 
+               name=\"Frequency step sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_step_sleep\"
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
+
+      <seekBar description=\"Fast scaling on early suspend. Possible values 0 disable or 1 enable. Default: 0.\" 
+               name=\"Fast scaling sleep\" 
+               action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling_sleep\"
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"1\"/>
+
+    </settingsPane>
+" >> $XML
+
+echo '
+  </settingsTab>
   <settingsTab name="Memory/Internal">
     <settingsPane description="Apply the settings on boot only if the desired settings prove to be stable, else the device ends up in a boot-loop. If turned off, the displayed values do not correspond the current live values but the saved profile values, some inconsistencies may occur on applying." 
                   name="MIF/INT voltage control switch">
