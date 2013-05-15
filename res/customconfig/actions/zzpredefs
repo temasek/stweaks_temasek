@@ -1,0 +1,280 @@
+#!/sbin/busybox sh
+
+if [ "a$2" != "a" ]; then
+    filename=$(basename $2)
+
+if [ "a$3" == "a" ]; then
+  evalcmd='eval "echo \$$filename"'
+  eval $evalcmd
+else
+  evalcmd='eval "$filename=$3"'
+  eval $evalcmd
+  evalcmd='eval "echo \$$filename"'
+  eval $evalcmd
+
+
+case "$zzpredef" in
+  0)
+    sampling_rate="100000"
+    sampling_down_factor="4"
+    up_threshold="70"
+    up_threshold_hotplug1="68"
+    up_threshold_hotplug2="68"
+    up_threshold_hotplug3="68"
+    down_threshold="52"
+    down_threshold_hotplug1="55"
+    down_threshold_hotplug2="55"
+    down_threshold_hotplug3="55"
+    ignore_nice_load="0"
+    freq_step="5"
+    freq_step_sleep="1"
+    smooth_up="75"
+    smooth_up_sleep="100"
+    sampling_rate_sleep_multiplier="2"
+    up_threshold_sleep="100"
+    down_threshold_sleep="60"
+    hotplug_sleep="1"
+    freq_limit="0"
+    freq_limit_sleep="800000"
+    fast_scaling="0"
+    fast_scaling_sleep="0"
+    zzmoove_predef="0"
+    ;;
+  1)
+    sampling_rate="100000"
+    sampling_down_factor="4"
+    up_threshold="70"
+    up_threshold_hotplug1="68"
+    up_threshold_hotplug2="68"
+    up_threshold_hotplug3="68"
+    down_threshold="52"
+    down_threshold_hotplug1="55"
+    down_threshold_hotplug2="55"
+    down_threshold_hotplug3="55"
+    ignore_nice_load="0"
+    freq_step="5"
+    freq_step_sleep="1"
+    smooth_up="75"
+    smooth_up_sleep="100"
+    sampling_rate_sleep_multiplier="2"
+    up_threshold_sleep="100"
+    down_threshold_sleep="60"
+    hotplug_sleep="1"
+    freq_limit="0"
+    freq_limit_sleep="800000"
+    fast_scaling="1"
+    fast_scaling_sleep="1"
+    zzmoove_predef="1"
+    ;;
+  2)
+    sampling_rate="120000"
+    sampling_down_factor="1"
+    up_threshold="95"
+    down_threshold="40"
+    ignore_nice_load="0"
+    freq_step="10"
+    smooth_up="75"
+    freq_limit="0"
+    fast_scaling="0"
+    up_threshold_hotplug1="50"
+    up_threshold_hotplug2="70"
+    up_threshold_hotplug3="98"
+    down_threshold_hotplug1="35"
+    down_threshold_hotplug2="45"
+    down_threshold_hotplug3="65"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="0"
+    zzmoove_predef="2"
+    ;;
+  3)
+    sampling_rate="120000"
+    sampling_down_factor="1"
+    up_threshold="95"
+    down_threshold="40"
+    ignore_nice_load="0"
+    freq_step="10"
+    smooth_up="75"
+    freq_limit="0"
+    fast_scaling="1"
+    up_threshold_hotplug1="50"
+    up_threshold_hotplug2="70"
+    up_threshold_hotplug3="98"
+    down_threshold_hotplug1="35"
+    down_threshold_hotplug2="45"
+    down_threshold_hotplug3="65"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="1"
+    zzmoove_predef="3"
+    ;;
+  4)
+    sampling_rate="45000"
+    sampling_down_factor="1"
+    up_threshold="67"
+    down_threshold="52"
+    ignore_nice_load="0"
+    freq_step="5"
+    smooth_up="75"
+    freq_limit="0"
+    fast_scaling="0"
+    up_threshold_hotplug1="68"
+    up_threshold_hotplug2="78"
+    up_threshold_hotplug3="88"
+    down_threshold_hotplug1="45"
+    down_threshold_hotplug2="55"
+    down_threshold_hotplug3="65"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="0"
+    zzmoove_predef="4"
+    ;;
+  5)
+    sampling_rate="45000"
+    sampling_down_factor="1"
+    up_threshold="67"
+    down_threshold="52"
+    ignore_nice_load="0"
+    freq_step="5"
+    smooth_up="75"
+    freq_limit="0"
+    fast_scaling="1"
+    up_threshold_hotplug1="68"
+    up_threshold_hotplug2="78"
+    up_threshold_hotplug3="88"
+    down_threshold_hotplug1="45"
+    down_threshold_hotplug2="55"
+    down_threshold_hotplug3="65"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="1"
+    zzmoove_predef="5"
+    ;;
+  6)
+    sampling_rate="40000"
+    sampling_down_factor="1"
+    up_threshold="60"
+    down_threshold="20"
+    ignore_nice_load="0"
+    freq_step="25"
+    smooth_up="70"
+    freq_limit="0"
+    fast_scaling="0"
+    up_threshold_hotplug1="65"
+    up_threshold_hotplug2="75"
+    up_threshold_hotplug3="85"
+    down_threshold_hotplug1="25"
+    down_threshold_hotplug2="35"
+    down_threshold_hotplug3="45"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="0"
+    zzmoove_predef="6"
+    ;;
+  7)
+    sampling_rate="40000"
+    sampling_down_factor="1"
+    up_threshold="60"
+    down_threshold="20"
+    ignore_nice_load="0"
+    freq_step="25"
+    smooth_up="70"
+    freq_limit="0"
+    fast_scaling="1"
+    up_threshold_hotplug1="65"
+    up_threshold_hotplug2="75"
+    up_threshold_hotplug3="85"
+    down_threshold_hotplug1="25"
+    down_threshold_hotplug2="35"
+    down_threshold_hotplug3="45"
+    sampling_rate_sleep_multiplier="2"
+    down_threshold_sleep="60"
+    up_threshold_sleep="100"
+    smooth_up_sleep="100"
+    hotplug_sleep="1"
+    freq_limit_sleep="800000"
+    freq_step_sleep="1"
+    fast_scaling_sleep="1"
+    zzmoove_predef="7"
+    ;;
+esac;
+
+echo `sampling_rate=$sampling_rate` >> $DEFAULT_PROFILE
+echo `sampling_down_factor=$sampling_down_factor` >> $DEFAULT_PROFILE
+echo `up_threshold=$up_threshold` >> $DEFAULT_PROFILE
+echo `down_threshold=$down_threshold` >> $DEFAULT_PROFILE
+echo `ignore_nice_load=$ignore_nice_load` >> $DEFAULT_PROFILE
+echo `freq_step=$freq_step` >> $DEFAULT_PROFILE
+echo `smooth_up=$smooth_up` >> $DEFAULT_PROFILE
+echo `freq_limit=$freq_limit` >> $DEFAULT_PROFILE
+echo `fast_scaling=$fast_scaling` >> $DEFAULT_PROFILE
+echo `up_threshold_hotplug1=$up_threshold_hotplug1` >> $DEFAULT_PROFILE
+echo `up_threshold_hotplug2=$up_threshold_hotplug2` >> $DEFAULT_PROFILE
+echo `up_threshold_hotplug3=$up_threshold_hotplug3` >> $DEFAULT_PROFILE
+echo `down_threshold_hotplug1=$down_threshold_hotplug1` >> $DEFAULT_PROFILE
+echo `down_threshold_hotplug2=$down_threshold_hotplug2` >> $DEFAULT_PROFILE
+echo `down_threshold_hotplug3=$down_threshold_hotplug3` >> $DEFAULT_PROFILE
+echo `sampling_rate_sleep_multiplier=$sampling_rate_sleep_multiplier` >> $DEFAULT_PROFILE
+echo `down_threshold_sleep=$down_threshold_sleep` >> $DEFAULT_PROFILE
+echo `up_threshold_sleep=$up_threshold_sleep` >> $DEFAULT_PROFILE
+echo `smooth_up_sleep=$smooth_up_sleep` >> $DEFAULT_PROFILE
+echo `hotplug_sleep=$hotplug_sleep` >> $DEFAULT_PROFILE
+echo `freq_limit_sleep=$freq_limit_sleep` >> $DEFAULT_PROFILE
+echo `freq_step_sleep=$freq_step_sleep` >> $DEFAULT_PROFILE
+echo `fast_scaling_sleep=$fast_scaling_sleep` >> $DEFAULT_PROFILE
+echo `zzmoove_predef=$zzmoove_predef` >> $DEFAULT_PROFILE
+
+echo $sampling_rate >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate
+echo $sampling_down_factor >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_down_factor
+echo $up_threshold >/sys/devices/system/cpu/cpufreq/zzmoove/up_threshold
+echo $down_threshold >/sys/devices/system/cpu/cpufreq/zzmoove/down_threshold
+echo $ignore_nice_load >/sys/devices/system/cpu/cpufreq/zzmoove/ignore_nice_load
+echo $freq_step >/sys/devices/system/cpu/cpufreq/zzmoove/freq_step
+echo $smooth_up >/sys/devices/system/cpu/cpufreq/zzmoove/smooth_up
+echo $freq_limit >/sys/devices/system/cpu/cpufreq/zzmoove/freq_limit
+echo $fast_scaling >/sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling
+echo $up_threshold_hotplug1 >/sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug1
+echo $up_threshold_hotplug2 >/sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug2
+echo $up_threshold_hotplug3 >/sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug3
+echo $down_threshold_hotplug1 >/sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug1
+echo $down_threshold_hotplug2 >/sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug2
+echo $down_threshold_hotplug3 >/sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug3
+echo $sampling_rate_sleep_multiplier >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate_sleep_multiplier
+echo $down_threshold_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_sleep
+echo $up_threshold_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_sleep
+echo $smooth_up_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/smooth_up_sleep
+echo $hotplug_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/hotplug_sleep
+echo $freq_limit_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep
+echo $freq_step_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/freq_step_sleep
+echo $fast_scaling_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling_sleep
+
+echo $zzmoove_predef
+
+fi
+fi
+fi
