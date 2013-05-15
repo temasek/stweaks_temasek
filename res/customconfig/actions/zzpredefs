@@ -38,6 +38,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     fast_scaling="0"
     fast_scaling_sleep="0"
+    zzmoove_predef="0"
     ;;
   1)
     sampling_rate="100000"
@@ -63,6 +64,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     fast_scaling="1"
     fast_scaling_sleep="1"
+    zzmoove_predef="1"
     ;;
   2)
     sampling_rate="120000"
@@ -88,6 +90,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="0"
+    zzmoove_predef="2"
     ;;
   3)
     sampling_rate="120000"
@@ -113,6 +116,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="1"
+    zzmoove_predef="3"
     ;;
   4)
     sampling_rate="45000"
@@ -138,6 +142,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="0"
+    zzmoove_predef="4"
     ;;
   5)
     sampling_rate="45000"
@@ -163,6 +168,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="1"
+    zzmoove_predef="5"
     ;;
   6)
     sampling_rate="40000"
@@ -188,6 +194,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="0"
+    zzmoove_predef="6"
     ;;
   7)
     sampling_rate="40000"
@@ -213,6 +220,7 @@ case "$zzpredef" in
     freq_limit_sleep="800000"
     freq_step_sleep="1"
     fast_scaling_sleep="1"
+    zzmoove_predef="7"
     ;;
 esac;
 
@@ -239,6 +247,7 @@ echo `hotplug_sleep=$hotplug_sleep` >> $DEFAULT_PROFILE
 echo `freq_limit_sleep=$freq_limit_sleep` >> $DEFAULT_PROFILE
 echo `freq_step_sleep=$freq_step_sleep` >> $DEFAULT_PROFILE
 echo `fast_scaling_sleep=$fast_scaling_sleep` >> $DEFAULT_PROFILE
+echo `zzmoove_predef=$zzmoove_predef` >> $DEFAULT_PROFILE
 
 echo $sampling_rate >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate
 echo $sampling_down_factor >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_down_factor
@@ -263,6 +272,8 @@ echo $hotplug_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/hotplug_sleep
 echo $freq_limit_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep
 echo $freq_step_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/freq_step_sleep
 echo $fast_scaling_sleep >/sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling_sleep
+
+echo $zzmoove_predef
 
 fi
 fi
