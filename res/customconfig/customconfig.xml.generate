@@ -802,8 +802,9 @@ echo '
                 label="Enable dynamic FSync"/>
 
     </settingsPane>
-  </settingsTab>
-
+  </settingsTab>' >> $XML
+if [ -e /sys/class/misc/wolfson_control ]; then
+echo '
   <settingsTab name="Audio">
     <settingsPane description="Speaker Tuning Settings" name="Speaker Tuning">
       <checkbox description="Enable speaker equalizer for better bass response on main speakers" 
@@ -900,11 +901,6 @@ echo '
                 unit="" min="0" reversed="false" step="1" max="31"/>
 
       <seekBar  description="" 
-		name="Microphone level during active camera"
-                action="generic /sys/class/misc/wolfson_control/mic_level_camera" 
-                unit="" min="0" reversed="false" step="1" max="31"/>
-
-      <seekBar  description="" 
 		name="Microphone level in-call"
                 action="generic /sys/class/misc/wolfson_control/mic_level_call"
                 unit="" min="0" reversed="false" step="1" max="31"/>
@@ -932,7 +928,15 @@ echo '
                 label="Enable force mono downmix"/>
 
     </settingsPane>
-  </settingsTab>
+  </settingsTab>' >> $XML
+elif [ -e /sys/class/misc/boeffla_sound ]; then
+	  echo '
+<settingsTab name="Audio">
+    <settingsPane description="Pleas use Boeffla Sound App to configure audio." name="Boeffla Sound"/>
+</settingsTab>' >> $XML
+fi
+
+echo '
 
   <settingsTab name="Power">
     <settingsPane description="Device charging currents are composed of input current coming into the device (Nominal 5V) and charge current fed to the battery (Battery Charge Voltage). Charger detection divides charging cable types into three categories: DCP - Dedicated Charging Port and AC Connector plugs; SDP - Standard Downstream Port for typical USB connectors; and CDP - Charging Downstream Port for USB connectors adhering to BC 1.1 specification. Input current is the sum of device load and charging load. If charging current exceeds input load, then charging current is dynamically adjusted. For avoiding battery deterioration, charging currents of less than 0.7 Coloumb are advised; ex. 2100mAh (Capacity) * 0.7C = ~1470mA."
