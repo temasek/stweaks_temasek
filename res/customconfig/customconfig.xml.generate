@@ -900,6 +900,11 @@ echo '
                 action="generic /sys/class/misc/wolfson_control/mic_level_general" 
                 unit="" min="0" reversed="false" step="1" max="31"/>
 
+      <seekBar  description=""
+                name="Microphone level during active camera"
+                action="generic /sys/class/misc/wolfson_control/mic_level_camera" 
+                unit="" min="0" reversed="false" step="1" max="31"/>
+
       <seekBar  description="" 
 		name="Microphone level in-call"
                 action="generic /sys/class/misc/wolfson_control/mic_level_call"
