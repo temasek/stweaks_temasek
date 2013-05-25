@@ -1,44 +1,15 @@
 #!/sbin/busybox sh
 
-if [[ ! -z $2 ]]; then
-    filename=$(basename $2)
-fi
-
-if [[ -z $3 ]]; then
-  evalcmd='eval "echo \$$filename"'
-  eval $evalcmd
-else
-  evalcmd='eval "$filename=$3"'
-  eval $evalcmd
-  evalcmd='eval "echo \$$filename"'
-  eval $evalcmd
-fi
-
 zzmoove_predef="0"
 zzmoove_find=`grep "zzmoove_predef" $DEFAULT_PROFILE | cut -d'=' -f2`
 
-#echo "P: $zzmoove_predef"
-#echo "F: $zzmoove_find"
-
-if [[ ! -z $zzmoove_find ]]; then
-  $zzmoove_predef = $zzmoove_find 
-else
-  edit_value zzmoove_predef "0"
-fi
-
-write_value() {
-  #echo "W: $1-$2"
-  
+write_value() {  
   echo "$1=$2" >> $DEFAULT_PROFILE
 }
 
 edit_value() {
-  #echo "E: $1-$2"
-
   g_find=`grep $1=.* $DEFAULT_PROFILE`
-  
-  #echo "G: $g_find"
-  
+    
   if [[ -z $g_find ]]; then
     write_value $1 $2
   else
@@ -314,6 +285,11 @@ case "$zzpredef" in
     zzmoove_predef="7"
     write_values
     ;;
-esac;
+  *)
+    if [[ ! -z $zzmoove_find ]]; then
+      zzmoove_predef="$zzmoove_find"
+    fi 
+    ;;
+esac
 
-eval echo $zzmoove_predef
+echo $zzmoove_predef
