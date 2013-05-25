@@ -1,5 +1,14 @@
 #!/sbin/busybox sh
 
+if [[ ! -z $2 ]]; then
+    filename=$(basename $2)
+fi
+
+if [[ ! -z $3 ]]; then
+  evalcmd='eval "$filename=$3"'
+  eval $evalcmd
+fi
+
 zzmoove_predef="0"
 zzmoove_find=`grep "zzmoove_predef" $DEFAULT_PROFILE | cut -d'=' -f2`
 
@@ -290,6 +299,6 @@ case "$zzpredef" in
       zzmoove_predef="$zzmoove_find"
     fi 
     ;;
-esac
+esac;
 
-echo $zzmoove_predef
+eval echo $zzmoove_predef
