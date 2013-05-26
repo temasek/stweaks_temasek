@@ -1024,7 +1024,15 @@ echo '
                 unit="ms" min="0" reversed="false" step="25" max="500"/>
 
     </settingsPane>
+    <settingsPane description="" 
+                  name="Touch Boost Switch">
+    
+     <checkbox  description="Enable touch boost at 800mhz step or disable it for variable steps" 
+                name="Touch Boost Switch" 
+                action="generic01 /sys/class/misc/touchboost_switch/touchboost_switch"
+                label="Enable touch boost"/>
 
+    </settingsPane>
     <settingsPane description="mobile Digital Natural Image engine control. Samsungs hardware image post-processor controls virtually any image manipulation. All control master switches, if left as delta controls, will negate the sequence setting if checked. Master sequence has SCR and CS enabled by default."
 		  name="Global controls">
 
