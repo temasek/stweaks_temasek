@@ -1033,6 +1033,20 @@ echo '
                 label="Enable touch boost"/>
 
     </settingsPane>
+    <settingsPane description="" 
+                  name="Touch-to-Wake">
+
+     <checkbox  description="Touch to Wake" name="Touch-to-Wake"
+                name="Touch-to-Wake" 
+                action="generic01 /sys/class/misc/touchwake/enabled"
+                label="Enable touch to wake"/>
+
+      <seekBar  description="Touch-To-Wake Delay in millisecond (Default is 5000ms). Setting Delay to 0 makes Touch-to-Wake permanently active !" 
+		name="Touch To Wake Delay" 
+                action="generic /sys/class/misc/touchwake/delay" 
+                unit=" ms" min="0" reversed="false" step="1000" max="60000"/>
+
+    </settingsPane>
     <settingsPane description="mobile Digital Natural Image engine control. Samsungs hardware image post-processor controls virtually any image manipulation. All control master switches, if left as delta controls, will negate the sequence setting if checked. Master sequence has SCR and CS enabled by default."
 		  name="Global controls">
 
