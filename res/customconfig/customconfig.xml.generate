@@ -1039,7 +1039,7 @@ echo '
      <checkbox  description="Touch to Wake" name="Touch-to-Wake"
                 name="Touch-to-Wake" 
                 action="generic01 /sys/class/misc/touchwake/enabled"
-                label="Enable touch-to-Wake"/>
+                label="Enable Touch-to-Wake"/>
 
       <seekBar  description="Touch-to-Wake Delay in millisecond (Default is 5000ms). Setting Delay to 0 makes Touch-to-Wake permanently active !" 
 		name="Touch-to-Wake Delay" 
