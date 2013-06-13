@@ -349,13 +349,9 @@ echo "
     <settingsPane description=\"Zzmoove predefined profiles\" name=\"Zzmoove predefined profiles\">
       <spinner description=\"Zzmoove predefined profiles\" name=\"Zzmoove predefined profiles\" action=\"zzpredefs zzpredef\">
              <spinnerItem name=\"Default\" value=\"0\"/> 
-             <spinnerItem name=\"Default w/FS\" value=\"1\"/> 
-             <spinnerItem name=\"Battery\" value=\"2\"/> 
-             <spinnerItem name=\"Battery w/FS\" value=\"3\"/> 
-             <spinnerItem name=\"Optimized\" value=\"4\"/> 
-             <spinnerItem name=\"Optimized w/FS\" value=\"5\"/> 
-             <spinnerItem name=\"Performance\" value=\"6\"/>
-             <spinnerItem name=\"Performance w/FS\" value=\"7\"/>
+             <spinnerItem name=\"Battery\" value=\"1\"/> 
+             <spinnerItem name=\"Optimized\" value=\"2\"/> 
+             <spinnerItem name=\"Performance\" value=\"3\"/>
       </spinner>
     </settingsPane>
     <settingsPane description=\"Parameters governing the dynamic voltage frequency scaling policy on the CPU.\" 
