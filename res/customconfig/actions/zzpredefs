@@ -59,7 +59,7 @@ write_values(){
   edit_value lcdfreq_kick_in_cores $lcdfreq_kick_in_cores
   edit_value lcdfreq_kick_in_up_delay $lcdfreq_kick_in_up_delay
   edit_value lcdfreq_kick_in_down_delay $lcdfreq_kick_in_down_delay
-  edit_value lcdfreq_kick_in_freq$ lcdfreq_kick_in_freq
+  edit_value lcdfreq_kick_in_freq $lcdfreq_kick_in_freq
   edit_value zzmoove_predef $zzmoove_predef 
 
   echo $sampling_rate >/sys/devices/system/cpu/cpufreq/zzmoove/sampling_rate
