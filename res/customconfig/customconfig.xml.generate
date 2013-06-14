@@ -387,7 +387,7 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold\"
                unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"99\"/>
 
-      <seekBar description=\"Up threshold on early suspend. Ppossible range from above down_threshold_sleep up to 100. Default: 100%.\"
+      <seekBar description=\"Up threshold on early suspend. Possible range from above down_threshold_sleep up to 100. Default: 100%.\"
                name=\"Up threshold sleep\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_sleep\"
                unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
@@ -468,12 +468,12 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit\"
                unit=\"hz\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1600000\"/>
 
-      <seekBar description=\"Possible values 0 disable, 200000-1600000 khz freqency soft-limit on early suspend, if not set default is 0. Default: 800000hz.\" 
+      <seekBar description=\"Possible values 0 disable, 200000-1600000 khz freqency soft-limit on early suspend. Default: 0.\" 
                name=\"Frequency limit sleep\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep\"
                unit=\"hz\" min=\"0\" reversed=\"false\" step=\"10000\" max=\"1600000\"/>
 
-      <seekBar description=\"Fast scaling at screen on. Possible values 0 disable or 1 or 2 enable, default: 0). Default: 0.\" 
+      <seekBar description=\"Fast scaling at screen on. Possible values 0 disable or 1 or 2 enable. Default: 0.\" 
                name=\"Fast scaling\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/fast_scaling\"
                unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"2\"/>
@@ -508,12 +508,12 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/lcdfreq_kick_in_cores\"
                unit=\"\" min=\"0\" reversed=\"false\" step=\"1\" max=\"4\"/>
 
-      <seekBar description=\"LCDFreq Scaling - added tuneable (Up Delay) -> number of samples to wait till switching to 40hz, possible range not specified. Default: 50.\" 
+      <seekBar description=\"LCDFreq Scaling - added tuneable (Up Delay) -> the amount of samples to wait over the threshold frequency before entering high display frequency mode (60hz). Default: 50.\" 
                name=\"LCDfreq kick in up delay\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/lcdfreq_kick_in_up_delay\"
                unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"50\"/>
 
-      <seekBar description=\"LCDFreq Scaling - added tuneable (Down Delay) -> number of samples to wait till switching to 40hz, possible range not specified. Default: 20.\" 
+      <seekBar description=\"LCDFreq Scaling - added tuneable (Down Delay) -> the amount of samples to wait below the threshold frequency before entering low display frequency mode (40hz). Default: 20.\" 
                name=\"LCDfreq kick in down delay\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/lcdfreq_kick_in_down_delay\"
                unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"20\"/>
@@ -521,7 +521,7 @@ echo "
       <seekBar description=\"LCDFreq Scaling - added tuneable (Frequency Threshold) -> frequency from where to start switching LCDFreq, possible values are all valid frequencies up to actual scaling limit. Default: 500000.\" 
                name=\"LCDfreq kick in frequency\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/lcdfreq_kick_in_freq\"
-               unit=\"\" min=\"1\" reversed=\"false\" step=\"1\" max=\"1000000\"/>
+               unit=\"\" min=\"1\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
     </settingsPane>
 " >> $XML
