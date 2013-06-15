@@ -521,7 +521,7 @@ echo "
       <seekBar description=\"LCDFreq Scaling - added tuneable (Frequency Threshold) -> frequency from where to start switching LCDFreq, possible values are all valid frequencies up to actual scaling limit. Default: 500000.\" 
                name=\"LCDfreq kick in frequency\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/lcdfreq_kick_in_freq\"
-               unit=\"\" min=\"1\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"200000\" reversed=\"false\" step=\"100000\" max=\"1600000\"/>
 
     </settingsPane>
 " >> $XML
