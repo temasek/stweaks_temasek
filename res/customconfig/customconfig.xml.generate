@@ -471,7 +471,7 @@ echo "
       <seekBar description=\"Possible values 0 disable, 200000-1600000 khz freqency soft-limit on early suspend. Default: 0.\" 
                name=\"Frequency limit sleep\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_limit_sleep\"
-               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"10000\" max=\"1600000\"/>
+               unit=\"hz\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1600000\"/>
 
       <seekBar description=\"Fast scaling at screen on. Possible values 0 disable or 1 or 2 enable. Default: 0.\" 
                name=\"Fast scaling\" 
