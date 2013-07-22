@@ -24,6 +24,9 @@ done
 echo '
       </spinner>
     </settingsPane>
+	<settingsPane description="These settings control CFS (Complete Fair Scheduler) Task Scheduler Settings" name="CFS Settings">
+      <checkbox description="Disabling GENTLE_FAIR_SLEEPERS may give you better UI responsiveness." name="GENTLE_FAIR_SLEEPERS" action="schedfeat GENTLE_FAIR_SLEEPERS" label="GENTLE_FAIR_SLEEPERS"/>
+    </settingsPane>
 	<settingsPane description="" 
 		name="CPU Idle and Power Settings">
       <spinner description="Sets the CPU Idle Mode. Idle+LPA is the default and recommended for S3." name="CPU Idle Mode" action="generic /sys/module/cpuidle_exynos4/parameters/enable_mask">
@@ -708,9 +711,10 @@ else
     <settingsPane description="Currently not configurable." name="GPU Settings"/> 
   </settingsTab>' >> $XML
 fi
-echo '
-  
 
+if [ -e /sys/devices/system/abb/abb_info ]; then
+
+echo '
   <settingsTab name="ABB">
     <settingsPane description="Adaptive Body Bias is a secondary voltage applied onto the body of the transistor, where as the normal voltage is the gate voltage. Adjusting the body voltage in a differential to the gate voltage changes the characteristics of the transistor in how it switches. The body bias is the delta of the body voltage to the gate voltage, or difference between gate voltage minus body voltage. A positive body bias results in a Forward Body Bias (FBB) which lowers the transistor switching threshold and allows for higher clocks at the same voltage, or lower voltage at the same clocks. A negative body bias, or Reverse Body Bias (RBB) raises the switching threshold and can drastically improve leakage, but with the reverse effects of FBB in terms of voltage and clocks. WARNING: For advanced users only who understand the electrical physics behind it."  
                   name="Adaptive Body Bias">
@@ -787,11 +791,17 @@ echo "
                unit=\"mV\" min=\"600\" reversed=\"false\" step=\"50\" max=\"1600\"/>
 
     </settingsPane>
+	</settingsTab>
 " >> $XML
 
-echo '
-  </settingsTab>
+else
+	  echo '
+<settingsTab name="ABB">
+    <settingsPane description="This kernel has been compiled without ABB support. Please flash ABB version if you want to use it" name="Adaptive Body Bias"/>
+</settingsTab>' >> $XML
+fi
 
+echo '
   <settingsTab name="I/O">
     <settingsPane description="Set the active I/O elevator algorithm. The scheduler decides how to handle I/O requests and how to handle them. FIOPS is the everyday recommended default scheduler."  
                   name="I/O schedulers">' >> $XML
