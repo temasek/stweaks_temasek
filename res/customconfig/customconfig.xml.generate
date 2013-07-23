@@ -24,6 +24,9 @@ done
 echo '
       </spinner>
     </settingsPane>
+	<settingsPane description="These settings control CFS (Complete Fair Scheduler) Task Scheduler Settings" name="CFS Settings">
+      <checkbox description="Disabling GENTLE_FAIR_SLEEPERS may give you better UI responsiveness." name="GENTLE_FAIR_SLEEPERS" action="schedfeat GENTLE_FAIR_SLEEPERS" label="GENTLE_FAIR_SLEEPERS"/>
+    </settingsPane>
 	<settingsPane description="" 
 		name="CPU Idle and Power Settings">
       <spinner description="Sets the CPU Idle Mode. Idle+LPA is the default and recommended for S3." name="CPU Idle Mode" action="generic /sys/module/cpuidle_exynos4/parameters/enable_mask">
@@ -711,9 +714,10 @@ else
     <settingsPane description="Currently not configurable." name="GPU Settings"/> 
   </settingsTab>' >> $XML
 fi
-echo '
-  
 
+if [ -e /sys/devices/system/abb/abb_info ]; then
+
+echo '
   <settingsTab name="ABB">
   <settingsPane description="ABB Info: ' >> $XML
   cat /sys/devices/system/abb/abb_info >> $XML
@@ -792,11 +796,17 @@ echo "
                unit=\"mV\" min=\"600\" reversed=\"false\" step=\"50\" max=\"1600\"/>
 
     </settingsPane>
+	</settingsTab>
 " >> $XML
 
-echo '
-  </settingsTab>
+else
+	  echo '
+<settingsTab name="ABB">
+    <settingsPane description="This kernel has been compiled without ABB support. Please flash ABB version if you want to use it" name="Adaptive Body Bias"/>
+</settingsTab>' >> $XML
+fi
 
+echo '
   <settingsTab name="I/O">
     <settingsPane description="Set the active I/O elevator algorithm. The scheduler decides how to handle I/O requests and how to handle them. FIOPS is the everyday recommended default scheduler."  
                   name="I/O schedulers">' >> $XML
