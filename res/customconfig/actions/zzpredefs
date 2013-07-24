@@ -308,6 +308,15 @@ case "$zzpredef" in
     early_demand="1"
     grad_up_threshold="50"
     ignore_nice_load="0"
+	sampling_down_max_momentum="0"
+    sampling_down_momentum_sensitivity="50"
+	disable_hotplug="0"
+	freq_limit="0"
+	lcdfreq_enable="0"
+    lcdfreq_kick_in_cores="0"
+    lcdfreq_kick_in_up_delay="1"
+    lcdfreq_kick_in_down_delay="5"
+    lcdfreq_kick_in_freq="500000"
 	zzmoove_predef="5"
     write_values
     ;;
@@ -336,6 +345,15 @@ case "$zzpredef" in
     early_demand="1"
     grad_up_threshold="50"
     ignore_nice_load="0"
+	sampling_down_max_momentum="0"
+    sampling_down_momentum_sensitivity="50"
+	disable_hotplug="0"
+	freq_limit="0"
+	lcdfreq_enable="0"
+    lcdfreq_kick_in_cores="0"
+    lcdfreq_kick_in_up_delay="1"
+    lcdfreq_kick_in_down_delay="5"
+    lcdfreq_kick_in_freq="500000"
 	zzmoove_predef="6"
     write_values
     ;;
