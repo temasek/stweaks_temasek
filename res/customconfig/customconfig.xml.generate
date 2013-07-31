@@ -765,20 +765,20 @@ echo '
 			<seekBar  description="Default: 31%. Defines needed threshold for changing to lower step" name="Step 4 Down Threshold" action="generic /sys/class/misc/gpu_clock_control/gpu_downthreshold_4" unit="%" min="0" reversed="false" step="1" max="100"/>
 			<seekBar  description="Default: 0. Staycount defines an additional delay before changing this step" name="Step 4 Staycount" action="generic /sys/class/misc/gpu_clock_control/gpu_staycount_4" unit="" min="0" reversed="false" step="1" max="255"/>
     </settingsPane>
-	<settingsPane description="Apply the settings on boot only if the desired settings prove to be stable, else the device ends up in a boot-loop. If turned off, the displayed values do not correspond the current live values but the saved profile values, some inconsistencies may occur on applying." 
-                  name="GPU control switch">
+	<settingsPane description="WARNING! These values are based on DEFAULT FREQUENCIES. They WILL NOT get refreshed if you change default frequencies above. If you are using non-default frequencies DO NOT tick this option unless you know how to set proper values for them." 
+                  name="GPU Control">
       <checkbox description="If enabled, the below settings will be applied at boot." 
                 name="Set GPU settings on boot" 
                 action="controlswitch GPU" 
                 label="Set on boot"/>
     </settingsPane>
-	<settingsPane description="todo" 
+	<settingsPane description="" 
                   name="GPU Voltage Control">
-      <seekBar  description="Defines this step power. Change with caution" name="Step 0 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_0" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
-	  <seekBar  description="Defines this step power. Change with caution" name="Step 1 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_1" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
-	  <seekBar  description="Defines this step power. Change with caution" name="Step 2 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_2" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
-	  <seekBar  description="Defines this step power. Change with caution" name="Step 3 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_3" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
-	  <seekBar  description="Defines this step power. Change with caution" name="Step 4 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_4" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+      <seekBar  description="" name="Step 0 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_0" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 1 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_1" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 2 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_2" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 3 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_3" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 4 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_4" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
     </settingsPane>' >> $XML
 echo '
   </settingsTab>'  >> $XML
