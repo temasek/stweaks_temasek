@@ -369,7 +369,7 @@ echo "
              <spinnerItem name=\"Performance [NOT 0.7 OPTIMIZED]\" value=\"3\"/>
              <spinnerItem name=\"Archi's Ultra Battery V2 with LCDFreq\" value=\"4\"/>
              <spinnerItem name=\"Yank's Battery\" value=\"5\"/>
-             <spinnerItem name=\"Yankzzmoove (Yank's Extended Battery)\" value=\"6\"/>
+             <spinnerItem name=\"Yankzzmoove (Yank's Extreme Battery)\" value=\"6\"/>
       </spinner>
     </settingsPane>
     <settingsPane description=\"Parameters governing the dynamic voltage frequency scaling policy on the CPU.\" 
