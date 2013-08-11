@@ -435,20 +435,20 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug3\"
                unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
 
-      <seekBar description=\"Hotplug up freq threshold for cpu1. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug up freq threshold for cpu1. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug up freq threshold CPU1\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug_freq1\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
-      <seekBar description=\"Hotplug up freq threshold for cpu2. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug up freq threshold for cpu2. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug up freq threshold CPU2\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug_freq2\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
-      <seekBar description=\"Hotplug up freq threshold for cpu3. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug up freq threshold for cpu3. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug up freq threshold CPU3\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/up_threshold_hotplug_freq3\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
       <seekBar description=\"This is same as the up_threshold but for the opposite direction. For example when set to its default value of 52 it means that if the CPU usage needs to be below 52 between samples to have the frequency decreased. Default: 52%.\" 
                name=\"Down threshold\" 
@@ -475,20 +475,20 @@ echo "
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug3\"
                unit=\"%\" min=\"11\" reversed=\"false\" step=\"1\" max=\"100\"/>
 
-      <seekBar description=\"Hotplug down freq threshold for cpu1. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug down freq threshold for cpu1. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug down freq threshold CPU1\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug_freq1\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
-      <seekBar description=\"Hotplug down freq threshold for cpu2. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug down freq threshold for cpu2. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug down freq threshold CPU2\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug_freq2\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
-      <seekBar description=\"Hotplug down freq threshold for cpu3. 0 disables freq threshold. Default: 0 µS.\"
+      <seekBar description=\"Hotplug down freq threshold for cpu3. 0 disables freq threshold. Default: 0.\"
                name=\"Hotplug down freq threshold CPU3\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/down_threshold_hotplug_freq3\"
-               unit=\"µS\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
+               unit=\"\" min=\"0\" reversed=\"false\" step=\"100000\" max=\"1400000\"/>
 
       <seekBar description=\"Hotplug switch for debugging and testing purposes -> possible values: 0 to disable, 1 to enable. Default: 0.\"
                name=\"Disable hotplug\" 
@@ -519,7 +519,6 @@ echo "
                name=\"Frequency step\" 
                action=\"generic /sys/devices/system/cpu/cpufreq/zzmoove/freq_step\"
                unit=\"%\" min=\"0\" reversed=\"false\" step=\"1\" max=\"100\"/>
-
 
       <seekBar description=\"Possible values: range from 0 to 100, if not set default is 5, value 0 will stop freq scaling and hold on actual freq. Value 100 will directly jump up or down to limits like ondemand governor. Default: 1.\" 
                name=\"Frequency step sleep\" 
