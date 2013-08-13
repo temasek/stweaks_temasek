@@ -1156,7 +1156,7 @@ elif [ -e /sys/class/misc/boeffla_sound ]; then
                 action="generic01 /sys/class/misc/boeffla_sound/speaker_tuning" 
                 label="Enable Speaker Tuning"/>
 
-      <spinner description="Required for Equalizer Preset to work" name="Equalizer" action="generic /sys/class/misc/boeffla_sound/eq">" >> $XML>
+      <spinner description="Required for Equalizer Preset to work" name="Equalizer" action="generic /sys/class/misc/boeffla_sound/eq">
              <spinnerItem name="Disabled" value="0"/> 
              <spinnerItem name="With Saturation Prevention" value="1"/> 
              <spinnerItem name="Without Saturation Prevention" value="2"/> 
