@@ -1123,10 +1123,47 @@ echo '
     </settingsPane>
   </settingsTab>' >> $XML
 elif [ -e /sys/class/misc/boeffla_sound ]; then
-	  echo '
-<settingsTab name="Audio">
-    <settingsPane description="Pleas use Boeffla Sound App to configure audio." name="Boeffla Sound"/>
-</settingsTab>' >> $XML
+	  echo '<settingsTab name="Audio">
+    <settingsPane description="Boeffla General" name="Boeffla General">
+
+       <checkbox  description="Required for all below functions to work" 
+                name="Boeffla Sound" 
+                action="generic01 /sys/class/misc/boeffla_sound/boeffla_sound"
+                label="Enable Boeffla Sound"/>
+
+	   <checkbox  description="Quiet the phone speaker on headphones plug" 
+                name="Privacy Mode" 
+                action="generic01 /sys/class/misc/boeffla_sound/privacy_mode"
+                label="Enable Privacy Mode"/>
+
+	   <checkbox  description="Bypass the analog channel mixer and redirect the sound directly to the output" 
+                name="DAC Direct" 
+                action="generic01 /sys/class/misc/boeffla_sound/dac_direct"
+                label="Enable DAC Direct"/>
+
+	   <checkbox  description="For 48kHz sample rate, the DAC oversample rate is 128fs when this option is selected, which makes the music sound better" 
+                name="DAC OverSampling" 
+                action="generic01 /sys/class/misc/boeffla_sound/dac_oversampling"
+                label="Enable DAC Oversampling"/>
+
+	   <checkbox  description="Tune the chip clock for better quality" 
+                name="FLL Tuning" 
+                action="generic01 /sys/class/misc/boeffla_sound/fll_tuning"
+                label="Enable FLL Tuning"/>
+
+	   <checkbox description="Enable speaker tuning for better bass response on main speakers" 
+                name="Speaker Tuning" 
+                action="generic01 /sys/class/misc/boeffla_sound/speaker_tuning" 
+                label="Enable Speaker Tuning"/>
+
+      <spinner description="Required for Equalizer Preset to work" name="Equalizer" action="generic /sys/class/misc/boeffla_sound/eq">" >> $XML>
+             <spinnerItem name="Disabled" value="0"/> 
+             <spinnerItem name="With Saturation Prevention" value="1"/> 
+             <spinnerItem name="Without Saturation Prevention" value="2"/> 
+      </spinner>
+
+    </settingsPane>
+  </settingsTab>' >> $XML
 fi
 
 echo '
