@@ -1045,6 +1045,16 @@ echo '
     <settingsPane description="Controls the hardware equalizer." 
                   name="Equalizer settings">
 
+      <checkbox description="Enable headphone equalizer for gain controls." 
+                name="Headphone equalizer" 
+                action="maskvalue 1 /sys/class/misc/wolfson_control/switch_eq_headphone" 
+                label="Enable headphone equalizer"/>
+
+      <checkbox description="Enable saturation prevention for headphone equalizer" 
+                name="Saturation prevention" 
+                action="maskvalue 2 /sys/class/misc/wolfson_control/switch_eq_headphone"
+                label="Enable saturation prevention"/>
+
       <seekBar  description="" 
 		name="Band1 gain" 
                 action="generic /sys/class/misc/wolfson_control/eq_hp_gain_1" 
@@ -1069,17 +1079,6 @@ echo '
 		name="Band5 gain" 
                 action="generic /sys/class/misc/wolfson_control/eq_hp_gain_5" 
                 unit=" dB" min="-12" reversed="false" step="1" max="12"/>
-				
-      <checkbox description="Enable headphone equalizer for gain controls." 
-                name="Headphone equalizer" 
-                action="maskvalue 1 /sys/class/misc/wolfson_control/switch_eq_headphone" 
-                label="Enable headphone equalizer"/>
-
-      <checkbox description="Enable saturation prevention for headphone equalizer" 
-                name="Saturation prevention" 
-                action="maskvalue 2 /sys/class/misc/wolfson_control/switch_eq_headphone"
-                label="Enable saturation prevention"/>
-
     </settingsPane>
 
     <settingsPane description="The microphone levels control the mic sensitivity." 
