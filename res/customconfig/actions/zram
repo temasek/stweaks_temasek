@@ -4,12 +4,18 @@
 
 if [ -z $2 ];then
 	if [ -z $zram_size ]; then
-		zram_size=`cat /sys/devices/virtual/block/zram0/disksize`
-		zram_size=`expr $zram_size \/ 1024 \/ 1024`
+		# It's 0 anyway
+		zram_size=0
+		#zram_size=`cat /sys/devices/virtual/block/zram0/disksize`
+		#zram_size=`expr $zram_size \/ 1024 \/ 1024`
 		echo zram_size=$zram_size >> $DEFAULT_PROFILE
 	fi
 else
 	zram_size=$2
+	
+	# We have 4 parallel disks so we need to divide zram_size by 4
+	zram_size=`expr $zram_size / 4`
+	
 
 	# We have 4 partitions now, starting from 0
 	for BLOCK in 0 1 2 3 ; do
@@ -21,6 +27,9 @@ else
 			echo $SIZE > /sys/devices/virtual/block/zram$BLOCK/disksize
 			mkswap /dev/block/zram$BLOCK > /dev/null 2>&1
 			swapon /dev/block/zram$BLOCK > /dev/null 2>&1
+			
+			# And let's return right value to satisfy STweaks
+			zramsize=`expr $zram_size \* 4`
 		fi
 	done
 fi

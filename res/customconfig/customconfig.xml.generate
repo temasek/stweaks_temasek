@@ -968,10 +968,10 @@ echo '
     <settingsPane name="ZRAM" 
                   description="ZRAM compresses memory pages in an in-memory swap disk. ">
 
-      <seekBar  description="The disk size represents the amount of non-compressed data allowed to fit into the compressed ramdisk. The actual memory used by the ramdisk varies depending on compression ratio." 
+      <seekBar  description="The disk size represents the amount of non-compressed data allowed to fit into the compressed ramdisk. The actual memory used by the ramdisk varies depending on compression ratio. Please notice that this value is divided through 4 parallel zram disks" 
                 name="ZRAM disk size" 
                 action="zram"
-                unit="mB" min="0" reversed="false" step="100" max="500"/>      
+                unit="mB" min="0" reversed="false" step="100" max="2000"/>      
 
       <seekBar  description="A low value means the kernel will try to avoid swapping as much as possible where a higher value instead will make the kernel aggressively try to use swap space." 
                 name="Virtual machine swappiness" 
