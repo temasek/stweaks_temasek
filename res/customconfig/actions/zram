@@ -27,11 +27,11 @@ else
 			echo $SIZE > /sys/devices/virtual/block/zram$BLOCK/disksize
 			mkswap /dev/block/zram$BLOCK > /dev/null 2>&1
 			swapon /dev/block/zram$BLOCK > /dev/null 2>&1
-			
-			# And let's return right value to satisfy STweaks
-			zramsize=`expr $zram_size \* 4`
 		fi
 	done
+	
+	# And let's return right value to satisfy STweaks
+	zramsize=`expr $zram_size \* 4`
 fi
 
 echo $zram_size
