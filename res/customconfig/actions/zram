@@ -1,5 +1,7 @@
 #!/sbin/busybox sh
 
+# Make it work in 4 parallel disks instead of one ~Archi
+
 if [ -z $2 ];then
 	if [ -z $zram_size ]; then
 		zram_size=`cat /sys/devices/virtual/block/zram0/disksize`
@@ -9,14 +11,18 @@ if [ -z $2 ];then
 else
 	zram_size=$2
 
-	swapoff /dev/block/zram0 > /dev/null 2>&1
-	echo 1 > /sys/devices/virtual/block/zram0/reset
+	# We have 4 partitions now, starting from 0
+	for BLOCK in 0 1 2 3 ; do
+		swapoff /dev/block/zram$BLOCK > /dev/null 2>&1
+		echo 1 > /sys/devices/virtual/block/zram$BLOCK/reset
 
-	if [ $zram_size -gt 0 ]; then
-		echo `expr $zram_size \* 1024 \* 1024` > /sys/devices/virtual/block/zram0/disksize
-		mkswap /dev/block/zram0 > /dev/null 2>&1
-		swapon /dev/block/zram0 > /dev/null 2>&1
-	fi
+		if [ $zram_size -gt 0 ]; then
+			SIZE=`expr $zram_size \* 1024 \* 1024`
+			echo $SIZE > /sys/devices/virtual/block/zram$BLOCK/disksize
+			mkswap /dev/block/zram$BLOCK > /dev/null 2>&1
+			swapon /dev/block/zram$BLOCK > /dev/null 2>&1
+		fi
+	done
 fi
 
 echo $zram_size
