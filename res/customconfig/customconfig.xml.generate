@@ -818,11 +818,11 @@ echo '
     </settingsPane>
 	<settingsPane description="" 
                   name="GPU Voltage Control">
-      <seekBar  description="" name="Step 0 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_0" unit="µV" min="800000" reversed="false" step="2500" max="1300000"/>
-	  <seekBar  description="" name="Step 1 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_1" unit="µV" min="800000" reversed="false" step="2500" max="1300000"/>
-	  <seekBar  description="" name="Step 2 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_2" unit="µV" min="800000" reversed="false" step="2500" max="1300000"/>
-	  <seekBar  description="" name="Step 3 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_3" unit="µV" min="800000" reversed="false" step="2500" max="1300000"/>
-	  <seekBar  description="" name="Step 4 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_4" unit="µV" min="800000" reversed="false" step="2500" max="1300000"/>
+      <seekBar  description="" name="Step 0 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_0" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 1 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_1" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 2 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_2" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 3 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_3" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
+	  <seekBar  description="" name="Step 4 Voltage" action="gpugeneric /sys/class/misc/gpu_voltage_control/gpu_voltage_4" unit="µV" min="800000" reversed="false" step="5000" max="1300000"/>
     </settingsPane>' >> $XML
 echo '
   </settingsTab>'  >> $XML
